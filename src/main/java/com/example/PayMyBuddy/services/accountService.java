@@ -2,36 +2,31 @@ package com.example.PayMyBuddy.services;
 
 import com.example.PayMyBuddy.dao.*;
 import com.example.PayMyBuddy.modeles.AccountFull;
-import com.example.PayMyBuddy.modeles.CB;
 import com.example.PayMyBuddy.modeles.MoyenPaiement;
 import com.example.PayMyBuddy.modeles.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
 import java.util.ArrayList;
 
 @Service
 public class accountService {
 
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    MoyenPaiementDAO moyenPaiementDAO;
-    @Autowired
-    CBDao cbDao;
-    @Autowired
-    CBRepository cbRepository;
-    @Autowired
-    RIBRepository ribRepository;
-    @Autowired
-    MoyenPaiementRepository moyenPaiementRepository;
-    @Autowired
-    RIBDao ribDao;
+    private final UserRepository userRepository;
+    private final MoyenPaiementDAO moyenPaiementDAO;
+    private final CBDao cbDao;
+    private final CBRepository cbRepository;
+    private final RIBRepository ribRepository;
+    private final MoyenPaiementRepository moyenPaiementRepository;
+    private final RIBDao ribDao;
 
+    public accountService(UserRepository userRepository, MoyenPaiementDAO moyenPaiementDAO, CBDao cbDao, CBRepository cbRepository, RIBRepository ribRepository, MoyenPaiementRepository moyenPaiementRepository, RIBDao ribDao) {
+        this.userRepository = userRepository;
+        this.moyenPaiementDAO = moyenPaiementDAO;
+        this.cbDao = cbDao;
+        this.cbRepository = cbRepository;
+        this.ribRepository = ribRepository;
+        this.moyenPaiementRepository = moyenPaiementRepository;
+        this.ribDao = ribDao;
+    }
 
 
     public void addAcountService (AccountFull account){

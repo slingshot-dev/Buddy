@@ -66,10 +66,5 @@ public class AmisServices {
 
         // Delete amis de la liste
         amisDAO.deleteAmis(idAmis);
-
-
     }
-
-
-
 }

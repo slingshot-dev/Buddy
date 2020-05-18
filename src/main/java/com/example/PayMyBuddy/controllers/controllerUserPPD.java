@@ -20,13 +20,11 @@ public class controllerUserPPD {
 
     private static final Logger logger = LogManager.getLogger(controllerUserPPD.class);
     private final UserService userService;
-    private final CBDao cbDao;
     private final accountService accountService;
     private final UserRepository userRepository;
 
     public controllerUserPPD(UserService userService, CBDao cbDao, com.example.PayMyBuddy.services.accountService accountService, UserRepository userRepository) {
         this.userService = userService;
-        this.cbDao = cbDao;
         this.accountService = accountService;
         this.userRepository = userRepository;
     }

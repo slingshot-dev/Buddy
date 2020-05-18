@@ -3,16 +3,13 @@ package com.example.PayMyBuddy.dao;
 import com.example.PayMyBuddy.config.DataBaseConfig;
 import com.example.PayMyBuddy.constants.DBConstants;
 import com.example.PayMyBuddy.modeles.AccountFull;
-import com.example.PayMyBuddy.modeles.CB;
-import com.example.PayMyBuddy.modeles.MoyenPaiement;
-import com.example.PayMyBuddy.modeles.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 
 @Repository
 public class MoyenPaiementDAO {

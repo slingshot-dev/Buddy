@@ -2,11 +2,6 @@ package com.example.PayMyBuddy.config;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Service;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
