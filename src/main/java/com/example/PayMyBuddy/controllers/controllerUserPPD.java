@@ -1,8 +1,8 @@
 package com.example.PayMyBuddy.controllers;
 
 import com.example.PayMyBuddy.dao.CBDao;
+import com.example.PayMyBuddy.dao.UserRepository;
 import com.example.PayMyBuddy.modeles.AccountFull;
-import com.example.PayMyBuddy.modeles.CB;
 import com.example.PayMyBuddy.modeles.User;
 import com.example.PayMyBuddy.services.UserService;
 import com.example.PayMyBuddy.services.accountService;
@@ -10,25 +10,30 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 public class controllerUserPPD {
+
+
 
     private static final Logger logger = LogManager.getLogger(controllerUserPPD.class);
     private final UserService userService;
     private final CBDao cbDao;
     private final accountService accountService;
+    private final UserRepository userRepository;
 
-    public controllerUserPPD(UserService userService, CBDao cbDao, com.example.PayMyBuddy.services.accountService accountService) {
+    public controllerUserPPD(UserService userService, CBDao cbDao, com.example.PayMyBuddy.services.accountService accountService, UserRepository userRepository) {
         this.userService = userService;
         this.cbDao = cbDao;
         this.accountService = accountService;
+        this.userRepository = userRepository;
     }
 
 
     @GetMapping
     public User getUser(String email) throws Exception {
-
         if (email.isEmpty()) {
             logger.error("One or more Parameters are missing");
             throw new Exception("Parameter : email, is necessary");
@@ -38,6 +43,11 @@ public class controllerUserPPD {
         }
     }
 
+    @GetMapping("/all")
+    public List<User> getAllUsers() {
+        // This returns a JSON or XML with the users
+        return userRepository.findAll();
+    }
 
     @PostMapping("/post")
     public void addUser(User inscription) throws Exception {
@@ -80,6 +90,28 @@ public class controllerUserPPD {
         } else {
             logger.info("Add Account request sent");
             accountService.addAcountService(account);
+        }
+    }
+
+    @DeleteMapping("/deletecb")
+    public void deleteCB(@RequestParam(name = "emailuser")String user, @RequestParam(name = "cbnom")String cbnom) throws Exception {
+        if (user.equals("")) {
+            logger.error("One or more Parameters are missing");
+            throw new Exception("Parameters : email are necessary");
+        } else {
+            logger.info("Delete Amis Request sent");
+            accountService.deleteCBService(user, cbnom);
+        }
+    }
+
+    @DeleteMapping("/deleterib")
+    public void deleteRib(@RequestParam(name = "emailuser")String user, @RequestParam(name = "ribnom")String ribnom) throws Exception {
+        if (user.equals("")) {
+            logger.error("One or more Parameters are missing");
+            throw new Exception("Parameters : email are necessary");
+        } else {
+            logger.info("Delete Amis Request sent");
+            accountService.deleteRIBService(user, ribnom);
         }
     }
 

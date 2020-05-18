@@ -46,4 +46,24 @@ public class MoyenPaiementDAO {
         }
         return result;
     }
+
+    public void deleteMoyrenP(int moyenp) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = dataBaseConfig.getConnection();
+
+            ps = con.prepareStatement(DBConstants.DELETE_MOYENP);
+            ps.setInt(1, moyenp);
+            ps.execute();
+
+        } catch (Exception ex) {
+            logger.error("Error lors de l'ajout d'un moyen de paiement", ex);
+        } finally {
+            dataBaseConfig.closePreparedStatement(ps);
+            dataBaseConfig.closeConnection(con);
+        }
+    }
+
 }

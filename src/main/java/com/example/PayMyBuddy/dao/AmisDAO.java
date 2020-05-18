@@ -63,5 +63,23 @@ public class AmisDAO {
         return rec;
     }
 
+    public void deleteAmis(int delete) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = dataBaseConfig.getConnection();
+            ps = con.prepareStatement(DBConstants.DELETE_AMIS);
+
+            ps.setInt(1, delete);
+            ps.execute();
+
+        } catch (Exception ex) {
+            logger.error("Error Delete Amis", ex);
+        } finally {
+            dataBaseConfig.closePreparedStatement(ps);
+            dataBaseConfig.closeConnection(con);
+        }
+    }
+
 
 }

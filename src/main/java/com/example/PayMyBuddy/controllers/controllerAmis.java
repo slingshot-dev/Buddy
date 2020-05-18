@@ -4,10 +4,7 @@ package com.example.PayMyBuddy.controllers;
 import com.example.PayMyBuddy.services.AmisServices;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,15 +21,25 @@ public class controllerAmis {
 
 
     @PostMapping("/post")
-    public void addAmisList(@RequestParam(name = "email")String amis) throws Exception {
+    public void addAmisList(@RequestParam(name = "emailuser")String user, @RequestParam(name = "emailamis")String amis) throws Exception {
         if (amis.equals("")) {
             logger.error("One or more Parameters are missing");
             throw new Exception("Parameters : email, username & Password, are necessary");
         } else {
             logger.info("Add Amis Request sent");
-            amisServices.addListAmis(amis);
+            amisServices.addListAmis(user, amis);
         }
     }
 
+    @DeleteMapping("/delete")
+    public void deleteAmisList(@RequestParam(name = "emailuser")String user, @RequestParam(name = "emailamis")String amis) throws Exception {
+        if (amis.equals("")) {
+            logger.error("One or more Parameters are missing");
+            throw new Exception("Parameters : email are necessary");
+        } else {
+            logger.info("Delete Amis Request sent");
+            amisServices.deleteAmisList(user, amis);
+        }
+    }
 
 }

@@ -39,19 +39,25 @@ public class CBDao {
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
         }
-
     }
 
+    public void deleteCB(int cb) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = dataBaseConfig.getConnection();
 
+            ps = con.prepareStatement(DBConstants.DELETE_CB);
+            ps.setInt(1, cb);
+            ps.execute();
 
-
-
-    public void addCBtest (CB newcb){
-
-        CB cb = new CB();
-        cb.setCbNom(newcb.getCbNom());
-        cb.setCbNumber(newcb.getCbNumber());
-        cb.setCbValide(newcb.getCbValide());
+        } catch (Exception ex) {
+            logger.error("Error lors de l'ajout d'un moyen de paiement", ex);
+        } finally {
+            dataBaseConfig.closePreparedStatement(ps);
+            dataBaseConfig.closeConnection(con);
+        }
     }
 
 

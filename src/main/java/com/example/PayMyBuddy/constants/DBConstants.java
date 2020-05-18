@@ -6,6 +6,10 @@ public class DBConstants {
     public static final String UPDATE_USER = "UPDATE user SET user_email=?, user_nom=?, user_prenom=?, user_password=? where pk_user=?";
     public static final String CHECK_USER = "select count(*) from user where user_email=?";
     public static final String DELETE_USER = "delete from user where user_email=?";
+    public static final String DELETE_AMIS = "delete from amis where pk_amis=?";
+    public static final String DELETE_CB = "delete from cb where pk_cb=?";
+    public static final String DELETE_RIB = "delete from rib where pk_rib=?";
+    public static final String DELETE_MOYENP = "delete from moyen_paiement where pk_moyen_paiement=?";
     public static final String CHECK_AMIS_LIST = "select count(*) from amis where amis_user=? && amis_amis=?";
     public static final String GET_USER = "select pk_user, user_email, user_nom, user_prenom, user_password, user_role from user where user_email=?";
     public static final String ADD_USER_LIST = "insert into amis(amis_user, amis_amis) values(?,?)";

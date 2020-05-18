@@ -20,8 +20,6 @@ public class CalculateBalanceService {
 
         int userBuddy = userService.getUserInfos(ServicesConstants.BuddyEmail).getIduser();
         int user = userService.getUserInfos(email).getIduser();
-
-
         return transactionDAO.calculateTransaction(user, userBuddy);
     }
 

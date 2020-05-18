@@ -15,10 +15,6 @@ public class TransactionService {
     }
 
 
-/*    public TRANSACTIONS getTransacInfos(int transacid) {
-        return transactionDAO.g(email);
-    }*/
-
     public void addTransac(TransacEmail transactions) {
 
         if (transactions.getTransacType().equals("Transfert")) {
@@ -31,10 +27,6 @@ public class TransactionService {
         else {
             transactions.setPrelevement(0);
         }
-
         transactionDAO.addTransaction(transactions);
-
     }
-
-
 }

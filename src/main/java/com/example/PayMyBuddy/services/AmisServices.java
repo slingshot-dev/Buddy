@@ -1,6 +1,8 @@
 package com.example.PayMyBuddy.services;
 
 import com.example.PayMyBuddy.dao.AmisDAO;
+import com.example.PayMyBuddy.dao.AmisRepository;
+import com.example.PayMyBuddy.dao.UserRepository;
 import com.example.PayMyBuddy.modeles.Amis;
 import com.example.PayMyBuddy.modeles.User;
 import org.apache.logging.log4j.LogManager;
@@ -13,14 +15,18 @@ public class AmisServices {
     private static final Logger logger = LogManager.getLogger(AmisServices.class);
     private final AmisDAO amisDAO;
     private final UserService userService;
+    private final UserRepository userRepository;
+    private final AmisRepository amisRepository;
 
-    public AmisServices(AmisDAO amisDAO, UserService userService) {
+    public AmisServices(AmisDAO amisDAO, UserService userService, UserRepository userRepository, AmisRepository amisRepository) {
         this.amisDAO = amisDAO;
         this.userService = userService;
+        this.userRepository = userRepository;
+        this.amisRepository = amisRepository;
     }
 
 
-    public void addListAmis(String amis) {
+    public void addListAmis(String user, String amis) {
 
         // Recuperer information sur le User a ajouter dans la liste amis
         User resultInfosUser = userService.getUserInfos(amis);
@@ -30,7 +36,7 @@ public class AmisServices {
             logger.error("User is not registered in Database");
         } else {
             int amisAmis = resultInfosUser.getIduser();
-            int amisUser = userService.getUserInfos("toto@outlook.fr").getIduser();
+            int amisUser = userService.getUserInfos(user).getIduser();
 
             Amis listAmis = new Amis();
 
@@ -46,11 +52,24 @@ public class AmisServices {
             } else {
                 logger.error("Error : User deja dans la Liste d'Amis"); // Si oui, Erreur
             }
-
         }
+    }
+
+    public void deleteAmisList (String emailUser, String emailAmis) {
+
+        // Recuperer iduser amis en fonction email
+        int iduserAmis = userRepository.getUSERByEmail(emailAmis).getIduser();
+        int iduserUser = userRepository.getUSERByEmail(emailUser).getIduser();
+
+        // Recuperer pk_amis
+        int idAmis = amisRepository.getAmisByAmisAmisAndAmisUser(iduserAmis, iduserUser).getIdamis();
+
+        // Delete amis de la liste
+        amisDAO.deleteAmis(idAmis);
 
 
     }
+
 
 
 }

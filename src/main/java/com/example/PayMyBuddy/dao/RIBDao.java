@@ -37,8 +37,25 @@ public class RIBDao {
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
         }
-
     }
 
+    public void deleteRIB(int rib) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = dataBaseConfig.getConnection();
+
+            ps = con.prepareStatement(DBConstants.DELETE_RIB);
+            ps.setInt(1, rib);
+            ps.execute();
+
+        } catch (Exception ex) {
+            logger.error("Error lors de l'ajout d'un moyen de paiement", ex);
+        } finally {
+            dataBaseConfig.closePreparedStatement(ps);
+            dataBaseConfig.closeConnection(con);
+        }
+    }
 
 }

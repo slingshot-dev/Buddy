@@ -70,7 +70,6 @@ public class TransactionDAO {
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
         }
-
     }
 
 
@@ -116,5 +115,4 @@ public class TransactionDAO {
         }
         return  resultBalance;
     }
-
 }

@@ -1,10 +1,9 @@
 package com.example.PayMyBuddy.modeles;
 
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
 @Entity
 @Table(name = "amis")
 public class Amis {

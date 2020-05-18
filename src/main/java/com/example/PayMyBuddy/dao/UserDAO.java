@@ -49,7 +49,6 @@ public class UserDAO {
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
         }
-
     }
 
     public boolean checkUser(String user) {
@@ -120,7 +119,6 @@ public class UserDAO {
             ps.setInt(5, update.getIduser());
             ps.execute();
 
-
         } catch (Exception ex) {
             logger.error("Error Update User", ex);
         } finally {
@@ -145,7 +143,5 @@ public class UserDAO {
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
         }
-
-
     }
 }

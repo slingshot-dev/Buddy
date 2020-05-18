@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import java.util.ArrayList;
 
 @Service
 public class accountService {
@@ -24,6 +25,8 @@ public class accountService {
     CBDao cbDao;
     @Autowired
     CBRepository cbRepository;
+    @Autowired
+    RIBRepository ribRepository;
     @Autowired
     MoyenPaiementRepository moyenPaiementRepository;
     @Autowired
@@ -49,38 +52,41 @@ public class accountService {
                 ribDao.addRIB(account, result);
                 break;
         }
-
     }
+
+    public void deleteCBService (String emailuser, String cbnom){
+
+        int iduser = userRepository.getUSERByEmail(emailuser).getIduser();
+        ArrayList<MoyenPaiement> idmoyenp = moyenPaiementRepository.getByFkuserAndAndMoyenType(iduser, "CB");
+
+        idmoyenp.forEach(moyenpaie -> {
+
+            int test = moyenpaie.getIdmoyenPaie();
+            String cbnom2 = cbRepository.findByFkMoyenP(test).getCbNom();
+            int idcb = cbRepository.findByFkMoyenP(test).getIdcb();
+            if( cbnom.equals(cbnom2) ){
+                cbDao.deleteCB(idcb);
+                moyenPaiementDAO.deleteMoyrenP(test);
+            }
+        });
+    }
+
+    public void deleteRIBService (String emailuser, String ribnom){
+
+        int iduser = userRepository.getUSERByEmail(emailuser).getIduser();
+        ArrayList<MoyenPaiement> idmoyenp = moyenPaiementRepository.getByFkuserAndAndMoyenType(iduser, "RIB");
+
+        idmoyenp.forEach(moyenpaie -> {
+
+            int idmp = moyenpaie.getIdmoyenPaie();
+            String cbnom2 = ribRepository.findByFkMoyenP(idmp).getRibNom();
+            int idrib = ribRepository.findByFkMoyenP(idmp).getIdrib();
+            if( ribnom.equals(cbnom2) ){
+                ribDao.deleteRIB(idrib);
+                moyenPaiementDAO.deleteMoyrenP(idmp);
+            }
+        });
+    }
+
+
 }
-
-
-/*        // inserer CB dans table cb
-        cbDao.addCB(newcb);
-
-        // inserer type moyen de paiement dans table moyen_paiement
-        MoyenPaiement moyenPaiement = new MoyenPaiement();
-        moyenPaiement.setMoyenType("CB");
-        moyenPaiementDAO.addMoyenPaiement(moyenPaiement);
-
-        // linker moyen et CB
-
-
-        // recuperer iduser et linker a Moyen
-        int iduser = userRepository.getUSERByEmail("toto@outlook.fr").getIduser();*/
-
-/*        MoyenPaiement moyenPaiement = new MoyenPaiement();
-        moyenPaiement.setMoyenType(account.getMoyenType());
-        moyenPaiement.setFkuser(account.getFkuser());
-
-        moyenPaiementRepository.save(moyenPaiement);
-
-        CB cb = new CB();
-        cb.setCbNom(account.getCbNom());
-        cb.setCbNumber(account.getCbNumber());
-        cb.setCbValide(account.getCbValide());*/
-/*        cb.setFkMoyenP(select LAST_INSERT_ID() from moyen_paiement);*/
-
-/*        int result = moyenPaiementDAO.getLastID();
-        cb.setFkMoyenP(result);
-
-        cbRepository.save(cb);*/

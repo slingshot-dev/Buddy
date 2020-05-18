@@ -13,6 +13,10 @@ import javax.persistence.PersistenceContext;
 public interface CBRepository extends JpaRepository<CB, Integer> {
 
 
-    CB findByCbNom(String cbNom);
+    CB findByCbNomAndFkMoyenP(String cbNom, int fkmoyenp);
+
+    CB findByFkMoyenPAndCbNom(int fkmoyenp, String cbnom);
+
+    CB findByFkMoyenP(int fkmoyenp);
 
 }

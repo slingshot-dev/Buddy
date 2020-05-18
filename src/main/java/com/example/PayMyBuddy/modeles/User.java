@@ -1,11 +1,8 @@
 package com.example.PayMyBuddy.modeles;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Table(name = "user")
