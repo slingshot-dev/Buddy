@@ -5,6 +5,8 @@ import com.example.PayMyBuddy.modeles.AccountFull;
 import com.example.PayMyBuddy.modeles.MoyenPaiement;
 import com.example.PayMyBuddy.modeles.User;
 import org.springframework.stereotype.Service;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Service
@@ -29,7 +31,7 @@ public class accountService {
     }
 
 
-    public void addAcountService (AccountFull account){
+    public void addAcountService (AccountFull account) throws SQLException {
 
         String moyenType = account.getMoyenType();
         int result = 0;
@@ -42,9 +44,8 @@ public class accountService {
                 cbDao.addCB(account, result);
                 break;
             case "RIB":
-                account.setFkUser(user.getIduser());
-                result = moyenPaiementDAO.addMoyenPaiement(account);
-                ribDao.addRIB(account, result);
+                account.setFkUser(user.getIduser()); // Ajout du RIB en mode Transactionnel
+                moyenPaiementDAO.addMoyenPaiementTransac(account);
                 break;
         }
     }
