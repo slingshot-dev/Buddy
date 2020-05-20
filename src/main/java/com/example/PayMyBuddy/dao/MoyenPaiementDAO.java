@@ -89,28 +89,24 @@ public class MoyenPaiementDAO {
             ps = con.prepareStatement(DBConstants.ADD_RIB);
             ps.setString(1, account.getRibNom());
             ps.setString(2, account.getRibNumber());
-            ps.setInt(3, result2);
+            ps.setInt(3, result);
             ps.execute();
 
             transactionOk = true;
+            con.commit();
 
         } catch (Exception ex) {
             logger.error("Error lors de l'ajout d'un moyen de paiement", ex);
-        } finally {
-            if (transactionOk) {
-                con.commit();
+            if (transactionOk){
+                con.rollback();
             }
             else {
-                if (con != null) {
-                    con.rollback();
-                }
+            logger.error("error before commit");
             }
 
+        } finally {
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
         }
-
     }
-
-
 }

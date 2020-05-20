@@ -115,7 +115,7 @@ public class UserDAO {
             ps.setString(1, update.getEmail());
             ps.setString(2, update.getNom());
             ps.setString(3, update.getPrenom());
-            ps.setString(4, update.getPassword());
+            ps.setString(4, passwordEncoder.encode(update.getPassword()));
             ps.setInt(5, update.getIduser());
             ps.execute();
 

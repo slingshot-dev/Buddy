@@ -23,12 +23,12 @@ public class UserService {
         return userDAO.getUser(email);
         }
 
-
         public void AddUser(User inscription) {
             userDAO.saveUser(inscription);
         }
 
         public void updateUser(User userUpdate) {
+            userUpdate.setIduser(getUserInfos(userUpdate.getEmail()).getIduser());
             userDAO.updateUser(userUpdate);
         }
 

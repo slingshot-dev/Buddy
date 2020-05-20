@@ -1,0 +1,3 @@
+insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(1, 'Buddy@buddy.com', 'Buddy', 'Societe', 'testbuddy', 'User');
+insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(2, 'Cyrille@outlook.fr', 'Guillet', 'Cyrille', 'test', 'User');
+insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(3, 'Fabienne@outlook.fr', 'Guillet', 'Fabienne', 'test2', 'User');

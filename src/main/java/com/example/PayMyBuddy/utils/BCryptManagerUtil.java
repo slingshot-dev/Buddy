@@ -10,18 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class BCryptManagerUtil {
 
-/*    private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public BCryptManagerUtil(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    @Bean(name = "passwordEncoder")
-    public static PasswordEncoder passwordencoder(){
-        return new BCryptPasswordEncoder();
-    }*/
-
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
