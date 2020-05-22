@@ -11,10 +11,11 @@ public class TransacEmail {
 
     private double montant;
 
+    private double montantPaye;
+
     private double prelevement;
 
     private String transacType;
-
 
 
     public String getEmailPayeur() {
@@ -39,6 +40,14 @@ public class TransacEmail {
 
     public void setMontant(double montant) {
         this.montant = montant;
+    }
+
+    public double getMontantPaye() {
+        return montantPaye;
+    }
+
+    public void setMontantPaye(double montantPaye) {
+        this.montantPaye = montantPaye;
     }
 
     public double getPrelevement() {

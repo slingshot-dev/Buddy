@@ -41,9 +41,9 @@ public class controllerTransaction {
     }
 
         @GetMapping("/balance")
-        public float getBalance(String email, HttpServletRequest request) throws Exception {
+        public double getBalance(String email, HttpServletRequest request) throws Exception {
 
-            float valeur = 0;
+            double valeur = 0;
 
             if (email.isEmpty()) {
                 logger.error("parameter email is necessary");
@@ -65,4 +65,24 @@ public class controllerTransaction {
             }
             return valeur;
     }
+
+    @GetMapping("/balancesociete")
+    public double getBalanceSociete(String email, HttpServletRequest request) {
+
+        double valeur = 0;
+            HttpSession session = request.getSession();
+
+            // recuperation de la session ne cours
+            User user = (User) session.getAttribute("user");
+
+            // verification si le user est bien connecté et lancement de la requete si email ok
+            if (user != null && email.equals(user.getEmail())) {
+                logger.info("GetBalance Request sent");
+                valeur = calculateBalanceService.calculateBalanceBuddy();
+            } else {
+                logger.error("user not authenticated");
+            }
+        return valeur;
+    }
+
 }

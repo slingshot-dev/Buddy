@@ -1,3 +1,3 @@
-insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(1, 'Buddy@buddy.com', 'Buddy', 'Societe', 'testbuddy', 'User');
-insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(2, 'Cyrille@outlook.fr', 'Guillet', 'Cyrille', 'test', 'User');
-insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(3, 'Fabienne@outlook.fr', 'Guillet', 'Fabienne', 'test2', 'User');
+insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(1, 'buddy@buddy.com', 'Buddy', 'Societe', '{bcrypt}$2a$10$X3veymzuN/E7v.tZVes9QOh3eDmMEIp62AFFFARhLtsB1zAXwdsWO', 'User');
+insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(2, 'cyrille@outlook.fr', 'Guillet', 'Cyrille', '{bcrypt}$2a$10$7FqZC5KiVZuAynSUziGOQO0T0Bxo22x0hUqNU6PDNjMduiKnuRfQ.', 'User');
+insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(3, 'fabienne@outlook.fr', 'Guillet', 'Fabienne', '{bcrypt}$2a$10$V4aH5f14MBrffars3DY3te9Y0lfip8Iv2dEgPwSWT4r2bFDk3nIOm', 'User');

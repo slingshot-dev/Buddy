@@ -17,12 +17,15 @@ public class CalculateBalanceService {
     }
 
 
-    public float calculateBalance (String email){
+    public double calculateBalance (String email){
 
         int userBuddy = userService.getUserInfos(ServicesConstants.BuddyEmail).getIduser();
         int user = userService.getUserInfos(email).getIduser();
         return transactionDAO.calculateTransaction(user, userBuddy);
     }
 
+    public double calculateBalanceBuddy (){
+        return transactionDAO.calculateBalancePrelev() + transactionDAO.calculateBalanceFonds();
+    }
 
 }

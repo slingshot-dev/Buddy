@@ -7,6 +7,4 @@ public interface AmisRepository extends JpaRepository<Amis, Integer> {
 
     Amis getAmisByAmisAmisAndAmisUser(int idamis, int iduser);
 
-    Amis getByAmisUser(String email);
-
 }

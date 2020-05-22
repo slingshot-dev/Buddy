@@ -33,13 +33,16 @@ public class Transactions {
     private double transacMontant;
 
     @NotNull
+    @Column(name = "transaction_paye", nullable = false, unique = true)
+    private double transacMontantPaye;
+
+    @NotNull
     @Column(name = "transaction_prelevement", nullable = false, unique = true)
     private double transacPrelevement;
 
     @NotNull
     @Column(name = "transaction_type", nullable = false, unique = true)
     private String transacType;
-
 
 
     public int getIdtransac() {
@@ -80,6 +83,14 @@ public class Transactions {
 
     public void setTransacMontant(double transacMontant) {
         this.transacMontant = transacMontant;
+    }
+
+    public double getTransacMontantPaye() {
+        return transacMontantPaye;
+    }
+
+    public void setTransacMontantPaye(double transacMontantPaye) {
+        this.transacMontantPaye = transacMontantPaye;
     }
 
     public double getTransacPrelevement() {
