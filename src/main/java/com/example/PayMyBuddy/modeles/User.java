@@ -1,10 +1,13 @@
 package com.example.PayMyBuddy.modeles;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 
 @Entity
+@JsonFilter("userObject")
 @Table(name = "user")
 public class User {
 

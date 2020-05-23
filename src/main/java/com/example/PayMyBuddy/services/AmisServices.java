@@ -9,6 +9,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Service
 public class AmisServices {
 
@@ -67,4 +71,26 @@ public class AmisServices {
         // Delete amis de la liste
         amisDAO.deleteAmis(idAmis);
     }
+
+    public List<User> getAmisList (String emailUser) {
+
+        ArrayList<User> resultListAmisEmail = new ArrayList<>();
+        // Recuperer iduser amis en fonction email
+        int iduserUser = userRepository.getUSERByEmail(emailUser).getIduser();
+
+        ArrayList<Amis> resultListAmis = amisRepository.getAmisByAmisUser(iduserUser);
+
+        resultListAmis.forEach(user ->{
+
+            User amis = userRepository.getUserByIduser(user.getAmisAmis());
+            resultListAmisEmail.add(amis);
+
+
+        });
+
+
+        return resultListAmisEmail;
+
+    }
+
 }
