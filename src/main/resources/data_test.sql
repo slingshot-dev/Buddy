@@ -1,0 +1,13 @@
+insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(1, 'buddy@buddy.com', 'Buddy', 'Societe', '{bcrypt}$2a$10$X3veymzuN/E7v.tZVes9QOh3eDmMEIp62AFFFARhLtsB1zAXwdsWO', 'User');
+insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(2, 'cyrille@outlook.fr', 'Guillet', 'Cyrille', '{bcrypt}$2a$10$7FqZC5KiVZuAynSUziGOQO0T0Bxo22x0hUqNU6PDNjMduiKnuRfQ.', 'User');
+insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(3, 'fabienne@outlook.fr', 'Guillet', 'Fabienne', '{bcrypt}$2a$10$V4aH5f14MBrffars3DY3te9Y0lfip8Iv2dEgPwSWT4r2bFDk3nIOm', 'User');
+insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(4, 'leane@outlook.fr', 'Guillet', 'Leane', 'test', 'User');
+insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(5, 'testamis1@outlook.fr', 'testamis1', 'testamis1', 'test2', 'User');
+insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(6, 'testamis2@outlook.fr', 'testamis2', 'testamis2', 'test3', 'User');
+insert into Buddy_REC.amis(pk_amis, amis_user, amis_amis) values(1, 2, 5);
+insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(7, 'testdelete@outlook.fr', 'testdelete', 'testdelete', 'test4', 'User');
+insert into Buddy_REC.transactions(pk_transaction, transaction_date, transaction_user_payeur, transaction_user_paye, transaction_montant, transaction_paye, transaction_prelevement, transaction_type) values(1, '2020-05-24 17:29:45', 2, 1, 500, 500, 0,'Chargement Fonds');
+insert into Buddy_REC.moyen_paiement(pk_moyen_paiement, moyen_paiement_type, fk_user) values(1, 'CB', 2);
+insert into Buddy_REC.cb(pk_cb, cb_nom, cb_number, cb_validite, fk_moyen_paiement) values(1, 'VISA CYG TestDel', '25631254', '123', 1);
+insert into Buddy_REC.moyen_paiement(pk_moyen_paiement, moyen_paiement_type, fk_user) values(2, 'RIB', 2);
+insert into Buddy_REC.rib(pk_rib, rib_nom, rib_number, fk_moyen_paiement) values(1, 'Credit Mutuel RIB Testdel', 'FR15 45698', 2);

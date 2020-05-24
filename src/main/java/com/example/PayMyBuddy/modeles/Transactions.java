@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "transactions")
-@Component
 public class Transactions {
 
     @Id

@@ -1,6 +1,5 @@
 package com.example.PayMyBuddy.controllers;
 
-
 import com.example.PayMyBuddy.modeles.User;
 import com.example.PayMyBuddy.services.AmisServices;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
@@ -10,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;

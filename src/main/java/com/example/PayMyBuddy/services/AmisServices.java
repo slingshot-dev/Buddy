@@ -75,6 +75,7 @@ public class AmisServices {
     public List<User> getAmisList (String emailUser) {
 
         ArrayList<User> resultListAmisEmail = new ArrayList<>();
+
         // Recuperer iduser amis en fonction email
         int iduserUser = userRepository.getUSERByEmail(emailUser).getIduser();
 

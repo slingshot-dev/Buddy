@@ -1,0 +1,1 @@
+insert into Buddy_REC.user(pk_user, user_email, user_nom, user_prenom, user_password, user_role) values(1, 'buddy@buddy.com', 'Buddy', 'Societe', '{bcrypt}$2a$10$X3veymzuN/E7v.tZVes9QOh3eDmMEIp62AFFFARhLtsB1zAXwdsWO', 'User');

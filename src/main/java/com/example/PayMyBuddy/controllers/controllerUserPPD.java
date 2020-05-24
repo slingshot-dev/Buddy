@@ -6,8 +6,12 @@ import com.example.PayMyBuddy.modeles.AccountFull;
 import com.example.PayMyBuddy.modeles.User;
 import com.example.PayMyBuddy.services.UserService;
 import com.example.PayMyBuddy.services.accountService;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -33,13 +37,19 @@ public class controllerUserPPD {
 
 
     @GetMapping
-    public User getUser(String email) throws Exception {
+    public MappingJacksonValue getUser(String email) throws Exception {
         if (email.isEmpty()) {
             logger.error("One or more Parameters are missing");
             throw new Exception("Parameter : email, is necessary");
         } else {
             logger.info("GetInfos User Request sent");
-            return userService.getUser(email);
+            User result = userService.getUser(email);
+
+            MappingJacksonValue result2 = new MappingJacksonValue(result);
+            FilterProvider filter = new SimpleFilterProvider().addFilter("userObject", SimpleBeanPropertyFilter.filterOutAllExcept("iduser", "email", "nom", "prenom", "password", "role"));
+            result2.setFilters(filter);
+
+            return result2;
         }
     }
 
@@ -139,7 +149,7 @@ public class controllerUserPPD {
 
             // verification si le user est bien connecté et lancement de la requete si email ok
             if (user2 != null && user.equals(user2.getEmail())) {
-                logger.info("Delete Amis Request sent");
+                logger.info("Delete CB Request sent");
                 accountService.deleteCBService(user, cbnom);
             } else {
                 logger.error("user not authenticated");

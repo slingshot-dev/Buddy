@@ -3,26 +3,29 @@ package it.com.example.PayMyBuddy.controllers;
 import com.example.PayMyBuddy.PayMyBuddyApplication;
 import com.example.PayMyBuddy.dao.AmisDAO;
 import com.example.PayMyBuddy.dao.AmisRepository;
-import com.example.PayMyBuddy.dao.UserDAO;
-import org.junit.jupiter.api.Test;
+import com.example.PayMyBuddy.modeles.Amis;
+import com.example.PayMyBuddy.modeles.User;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @SpringBootTest(classes = PayMyBuddyApplication.class)
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Sql({"/delete.sql", "/data_test.sql"})
 public class controllerAmisTests {
 
 
@@ -31,27 +34,59 @@ public class controllerAmisTests {
     MockMvc mockMvc;
     @Autowired
     AmisRepository amisRepository;
+    @Autowired
+    AmisDAO amisDAO;
+
 
 
     @Test
     public void addAmis() throws Exception {
-        // Arrange & Act
-        this.mockMvc.perform(post("/amis/post?emailuser=cyrille@outlook.fr&emailamis=fabienne@outlook.fr"))
+        MockHttpSession session = new MockHttpSession();
+
+        User user = new User();
+        user.setEmail("cyrille@outlook.fr");
+        session.setAttribute("user", user);
+        Amis listAmis = new Amis();
+
+        listAmis.setAmisUser(2);
+        listAmis.setAmisAmis(6);
+
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post("/amis/post?emailuser=cyrille@outlook.fr&emailamis=testamis2@outlook.fr")
+                .session(session);
+        this.mockMvc.perform(builder)
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("")));
+                .andExpect(MockMvcResultMatchers.status()
+                        .isOk());
+
+        assertTrue(amisDAO.checkAmisList(listAmis));
+
     }
+
 
     @Test
     public void deleteAmis() throws Exception {
         // Arrange & Act
-        MvcResult mvcResult = this.mockMvc.perform(post("/amis/post?emailuser=cyrille@outlook.fr&emailamis=fabienne@outlook.fr"))
-                .andDo(print()).andReturn();
-        MvcResult mvcResult2 = this.mockMvc.perform(delete("/amis/delete/?emailuser=cyrille@outlook.fr&emailamis=fabienne@outlook.fr"))
-                .andDo(print()).andReturn();
+        MockHttpSession session = new MockHttpSession();
+        User user = new User();
+        user.setEmail("cyrille@outlook.fr");
+        session.setAttribute("user", user);
+
+        Amis listAmis = new Amis();
+
+        listAmis.setAmisUser(2);
+        listAmis.setAmisAmis(5);
+
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.delete("/amis/delete/?emailuser=cyrille@outlook.fr&emailamis=testamis1@outlook.fr")
+                .session(session);
+
         // Assert
-        int status = mvcResult2.getResponse().getStatus();
-        assertEquals(200, status);
+        this.mockMvc.perform(builder)
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status()
+                        .isOk());
+
+        assertFalse(amisDAO.checkAmisList(listAmis));
+
     }
 
 

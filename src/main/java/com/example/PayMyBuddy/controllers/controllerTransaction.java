@@ -20,12 +20,10 @@ public class controllerTransaction {
     private static final Logger logger = LogManager.getLogger(controllerUserPPD.class);
     private final TransactionService transactionService;
     private final CalculateBalanceService calculateBalanceService;
-    private final UserService userService;
 
     public controllerTransaction(TransactionService transactionService, CalculateBalanceService calculateBalanceService, UserService userService) {
         this.transactionService = transactionService;
         this.calculateBalanceService = calculateBalanceService;
-        this.userService = userService;
     }
 
 
