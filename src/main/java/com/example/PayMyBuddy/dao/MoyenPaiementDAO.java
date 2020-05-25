@@ -13,11 +13,12 @@ import java.sql.SQLException;
 
 
 @Repository
-public class MoyenPaiementDAO {
+public class MoyenPaiementDAO implements IMoyenPaiementDAO {
 
     public DataBaseConfig dataBaseConfig = new DataBaseConfig();
     private static final Logger logger = LogManager.getLogger("MoyenPaiementDAO");
 
+    @Override
     public int addMoyenPaiement(AccountFull account) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -45,6 +46,7 @@ public class MoyenPaiementDAO {
         return result;
     }
 
+    @Override
     public void deleteMoyrenP(int moyenp) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -64,6 +66,7 @@ public class MoyenPaiementDAO {
         }
     }
 
+    @Override
     public void addMoyenPaiementTransac(AccountFull account) throws SQLException {
 
         Connection con = null;

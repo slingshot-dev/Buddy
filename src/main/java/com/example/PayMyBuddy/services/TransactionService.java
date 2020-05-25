@@ -1,6 +1,7 @@
 package com.example.PayMyBuddy.services;
 
 import com.example.PayMyBuddy.constants.ServicesConstants;
+import com.example.PayMyBuddy.dao.ITransactionDAO;
 import com.example.PayMyBuddy.dao.TransactionDAO;
 import com.example.PayMyBuddy.modeles.TransacEmail;
 import org.apache.logging.log4j.LogManager;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class TransactionService {
 
     private static final Logger logger = LogManager.getLogger(TransactionService.class);
-    private final TransactionDAO transactionDAO;
+    private final ITransactionDAO transactionDAO;
 
     public TransactionService(TransactionDAO transactionDAO) {
         this.transactionDAO = transactionDAO;

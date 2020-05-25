@@ -10,12 +10,13 @@ import java.sql.*;
 
 
 @Repository
-public class TransactionDAO {
+public class TransactionDAO implements ITransactionDAO {
 
     private static final Logger logger = LogManager.getLogger("UserDAO");
     public DataBaseConfig dataBaseConfig = new DataBaseConfig();
 
 
+    @Override
     public void addTransaction(TransacEmail transactions) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -56,6 +57,7 @@ public class TransactionDAO {
     }
 
 
+    @Override
     public double calculateTransaction(int user, int userBuddy) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -98,6 +100,7 @@ public class TransactionDAO {
     }
 
 
+    @Override
     public double calculateBalanceFonds() {
         Connection con = null;
         PreparedStatement ps = null;
@@ -131,6 +134,7 @@ public class TransactionDAO {
     }
 
 
+    @Override
     public double calculateBalancePrelev() {
         Connection con = null;
         PreparedStatement ps = null;

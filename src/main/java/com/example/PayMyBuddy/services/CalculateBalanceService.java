@@ -1,6 +1,7 @@
 package com.example.PayMyBuddy.services;
 
 import com.example.PayMyBuddy.constants.ServicesConstants;
+import com.example.PayMyBuddy.dao.ITransactionDAO;
 import com.example.PayMyBuddy.dao.TransactionDAO;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class CalculateBalanceService {
 
     private final UserService userService;
-    private final TransactionDAO transactionDAO;
+    private final ITransactionDAO transactionDAO;
 
     public CalculateBalanceService(UserService userService, TransactionDAO transactionDAO) {
         this.userService = userService;

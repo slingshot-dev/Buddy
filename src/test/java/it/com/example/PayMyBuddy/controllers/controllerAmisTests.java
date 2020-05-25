@@ -2,7 +2,7 @@ package it.com.example.PayMyBuddy.controllers;
 
 import com.example.PayMyBuddy.PayMyBuddyApplication;
 import com.example.PayMyBuddy.dao.AmisDAO;
-import com.example.PayMyBuddy.dao.AmisRepository;
+import com.example.PayMyBuddy.repository.AmisRepository;
 import com.example.PayMyBuddy.modeles.Amis;
 import com.example.PayMyBuddy.modeles.User;
 import org.junit.jupiter.api.*;

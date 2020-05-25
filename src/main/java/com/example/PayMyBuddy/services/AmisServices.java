@@ -1,8 +1,9 @@
 package com.example.PayMyBuddy.services;
 
 import com.example.PayMyBuddy.dao.AmisDAO;
-import com.example.PayMyBuddy.dao.AmisRepository;
-import com.example.PayMyBuddy.dao.UserRepository;
+import com.example.PayMyBuddy.dao.IAmisDAO;
+import com.example.PayMyBuddy.repository.AmisRepository;
+import com.example.PayMyBuddy.repository.UserRepository;
 import com.example.PayMyBuddy.modeles.Amis;
 import com.example.PayMyBuddy.modeles.User;
 import org.apache.logging.log4j.LogManager;
@@ -11,13 +12,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class AmisServices {
 
     private static final Logger logger = LogManager.getLogger(AmisServices.class);
-    private final AmisDAO amisDAO;
+    private final IAmisDAO amisDAO;
     private final UserService userService;
     private final UserRepository userRepository;
     private final AmisRepository amisRepository;

@@ -11,12 +11,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 @Repository
-public class CBDao {
+public class CBDao implements ICBDao {
 
     private static final Logger logger = LogManager.getLogger("CBDao");
     public DataBaseConfig dataBaseConfig = new DataBaseConfig();
 
-
+    @Override
     public void addCB(AccountFull account, int result) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -39,6 +39,7 @@ public class CBDao {
         }
     }
 
+    @Override
     public void deleteCB(int cb) {
         Connection con = null;
         PreparedStatement ps = null;

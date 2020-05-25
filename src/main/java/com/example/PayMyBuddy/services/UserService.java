@@ -1,8 +1,9 @@
 
 package com.example.PayMyBuddy.services;
 
+import com.example.PayMyBuddy.dao.IUserDAO;
 import com.example.PayMyBuddy.dao.UserDAO;
-import com.example.PayMyBuddy.dao.UserRepository;
+import com.example.PayMyBuddy.repository.UserRepository;
 import com.example.PayMyBuddy.modeles.User;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service("userService")
 public class UserService {
 
-    private final UserDAO userDAO;
+    private final IUserDAO userDAO;
     private final UserRepository userRepository;
 
     public UserService(UserDAO userDAO, UserRepository userRepository) {

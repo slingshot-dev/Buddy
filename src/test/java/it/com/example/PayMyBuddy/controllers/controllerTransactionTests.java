@@ -1,11 +1,8 @@
 package it.com.example.PayMyBuddy.controllers;
 
 import com.example.PayMyBuddy.PayMyBuddyApplication;
-import com.example.PayMyBuddy.dao.TransactionRepository;
-import com.example.PayMyBuddy.dao.UserDAO;
-import com.example.PayMyBuddy.modeles.Amis;
+import com.example.PayMyBuddy.repository.TransactionRepository;
 import com.example.PayMyBuddy.modeles.User;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,13 +18,10 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(classes = PayMyBuddyApplication.class)
 @AutoConfigureMockMvc

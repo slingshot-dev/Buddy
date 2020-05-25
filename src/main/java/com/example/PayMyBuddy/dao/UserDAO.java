@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 @Repository
-public class UserDAO {
+public class UserDAO implements IUserDAO {
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -22,6 +22,7 @@ public class UserDAO {
     private static final Logger logger = LogManager.getLogger("UserDAO");
     public DataBaseConfig dataBaseConfig = new DataBaseConfig();
 
+    @Override
     public void saveUser(User inscription) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -51,6 +52,7 @@ public class UserDAO {
         }
     }
 
+    @Override
     public boolean checkUser(String user) {
         Connection con = null;
         int test = 0;
@@ -77,6 +79,7 @@ public class UserDAO {
         return rec;
     }
 
+    @Override
     public User getUser(String email) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -105,6 +108,7 @@ public class UserDAO {
         return result;
     }
 
+    @Override
     public void updateUser(User update) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -127,6 +131,7 @@ public class UserDAO {
         }
     }
 
+    @Override
     public void deleteUser(String delete) {
         Connection con = null;
         PreparedStatement ps = null;

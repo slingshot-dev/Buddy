@@ -11,13 +11,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 @Repository
-public class AmisDAO {
+public class AmisDAO implements IAmisDAO {
 
 
     private static final Logger logger = LogManager.getLogger("AmisDAO");
     public DataBaseConfig dataBaseConfig = new DataBaseConfig();
 
-    public boolean AddList(Amis amis) {
+    @Override
+    public void AddList(Amis amis) {
         Connection con = null;
         PreparedStatement ps = null;
         try {
@@ -34,9 +35,9 @@ public class AmisDAO {
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
         }
-        return true;
     }
 
+    @Override
     public boolean checkAmisList(Amis amis) {
         Connection con = null;
         int test=0;
@@ -62,6 +63,7 @@ public class AmisDAO {
         return rec;
     }
 
+    @Override
     public void deleteAmis(int delete) {
         Connection con = null;
         PreparedStatement ps = null;

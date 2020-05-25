@@ -1,4 +1,4 @@
-package com.example.PayMyBuddy.dao;
+package com.example.PayMyBuddy.repository;
 
 import com.example.PayMyBuddy.modeles.MoyenPaiement;
 import org.springframework.data.jpa.repository.JpaRepository;

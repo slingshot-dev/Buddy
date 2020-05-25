@@ -4,6 +4,10 @@ import com.example.PayMyBuddy.dao.*;
 import com.example.PayMyBuddy.modeles.AccountFull;
 import com.example.PayMyBuddy.modeles.MoyenPaiement;
 import com.example.PayMyBuddy.modeles.User;
+import com.example.PayMyBuddy.repository.CBRepository;
+import com.example.PayMyBuddy.repository.MoyenPaiementRepository;
+import com.example.PayMyBuddy.repository.RIBRepository;
+import com.example.PayMyBuddy.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,12 +16,12 @@ import java.util.ArrayList;
 public class accountService {
 
     private final UserRepository userRepository;
-    private final MoyenPaiementDAO moyenPaiementDAO;
-    private final CBDao cbDao;
+    private final IMoyenPaiementDAO moyenPaiementDAO;
+    private final ICBDao cbDao;
     private final CBRepository cbRepository;
     private final RIBRepository ribRepository;
     private final MoyenPaiementRepository moyenPaiementRepository;
-    private final RIBDao ribDao;
+    private final IRIBDao ribDao;
 
     public accountService(UserRepository userRepository, MoyenPaiementDAO moyenPaiementDAO, CBDao cbDao, CBRepository cbRepository, RIBRepository ribRepository, MoyenPaiementRepository moyenPaiementRepository, RIBDao ribDao) {
         this.userRepository = userRepository;

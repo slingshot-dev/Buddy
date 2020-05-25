@@ -1,18 +1,14 @@
 package it.com.example.PayMyBuddy.controllers;
 
 import com.example.PayMyBuddy.PayMyBuddyApplication;
-import com.example.PayMyBuddy.controllers.ControllerLogin;
-import com.example.PayMyBuddy.dao.CBRepository;
-import com.example.PayMyBuddy.dao.RIBRepository;
+import com.example.PayMyBuddy.repository.CBRepository;
+import com.example.PayMyBuddy.repository.RIBRepository;
 import com.example.PayMyBuddy.dao.UserDAO;
 import com.example.PayMyBuddy.modeles.User;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -24,7 +20,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;

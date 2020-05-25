@@ -12,12 +12,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 @Repository
-public class RIBDao {
+public class RIBDao implements IRIBDao {
 
     private static final Logger logger = LogManager.getLogger("RIBDao");
     public DataBaseConfig dataBaseConfig = new DataBaseConfig();
 
 
+    @Override
     public void addRIB(AccountFull account, int result) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -39,6 +40,7 @@ public class RIBDao {
         }
     }
 
+    @Override
     public void deleteRIB(int rib) {
         Connection con = null;
         PreparedStatement ps = null;
