@@ -13,6 +13,13 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service permettant :
+ * - L'ajout d'un amis a la Liste d'amis
+ * - Suppression d'un amis de la Liste d'amis
+ * - Recuperation des infos des mais de la Liste d'amis
+ */
+
 @Service
 public class AmisServices {
 
@@ -29,6 +36,10 @@ public class AmisServices {
         this.amisRepository = amisRepository;
     }
 
+    /**
+     * @param user : Infos utilisateur proprietaire de la Liste d'amis
+     * @param amis : Amis a ajouter
+     */
 
     public void addListAmis(String user, String amis) {
 
@@ -47,11 +58,11 @@ public class AmisServices {
             listAmis.setAmisUser(amisUser);
             listAmis.setAmisAmis(amisAmis);
 
-        // Verfier si User est deja dans a Liste d'amis
+            // Verfier si User est deja dans a Liste d'amis
             boolean result = amisDAO.checkAmisList(listAmis);
 
             if (!result) {
-                amisDAO.AddList(listAmis); // Si non, on ajoute a la Liste d'amis
+                amisDAO.addList(listAmis); // Si non, on ajoute a la Liste d'amis
                 logger.info("User ajouté a la Liste d'Amis");
             } else {
                 logger.error("Error : User deja dans la Liste d'Amis"); // Si oui, Erreur
@@ -59,7 +70,12 @@ public class AmisServices {
         }
     }
 
-    public void deleteAmisList (String emailUser, String emailAmis) {
+    /**
+     * @param emailUser : Email de l'utilisateur
+     * @param emailAmis : Amis a supprimer de la Liste
+     */
+
+    public void deleteAmisList(String emailUser, String emailAmis) {
 
         // Recuperer iduser amis en fonction email
         int iduserAmis = userRepository.getUSERByEmail(emailAmis).getIduser();
@@ -72,7 +88,12 @@ public class AmisServices {
         amisDAO.deleteAmis(idAmis);
     }
 
-    public List<User> getAmisList (String emailUser) {
+    /**
+     * @param emailUser : Email de l'utilisateur
+     * @return : Retour la liste d'amis de la Liste
+     */
+
+    public List<User> getAmisList(String emailUser) {
 
         ArrayList<User> resultListAmisEmail = new ArrayList<>();
 
@@ -81,17 +102,11 @@ public class AmisServices {
 
         ArrayList<Amis> resultListAmis = amisRepository.getAmisByAmisUser(iduserUser);
 
-        resultListAmis.forEach(user ->{
+        resultListAmis.forEach(user -> {
 
             User amis = userRepository.getUserByIduser(user.getAmisAmis());
             resultListAmisEmail.add(amis);
-
-
         });
-
-
         return resultListAmisEmail;
-
     }
-
 }

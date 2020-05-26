@@ -20,7 +20,6 @@ public class CBDao implements ICBDao {
     public void addCB(AccountFull account, int result) {
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             con = dataBaseConfig.getConnection();
 
@@ -43,7 +42,6 @@ public class CBDao implements ICBDao {
     public void deleteCB(int cb) {
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             con = dataBaseConfig.getConnection();
 

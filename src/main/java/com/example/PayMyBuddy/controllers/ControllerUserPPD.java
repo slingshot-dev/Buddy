@@ -5,7 +5,7 @@ import com.example.PayMyBuddy.repository.UserRepository;
 import com.example.PayMyBuddy.modeles.AccountFull;
 import com.example.PayMyBuddy.modeles.User;
 import com.example.PayMyBuddy.services.UserService;
-import com.example.PayMyBuddy.services.accountService;
+import com.example.PayMyBuddy.services.AccountService;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
@@ -17,24 +17,38 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+/**
+ * Controller permettant les actions suivantes pour un Uitilisateur
+ * - la creation
+ * - la recuperation d'infos
+ *  - la mise a jour
+ *  - la suppression
+ *  - l'ajout d'un RIB ou CB
+ */
 
 @RestController
 @RequestMapping("/user")
-public class controllerUserPPD {
+public class ControllerUserPPD {
 
 
 
-    private static final Logger logger = LogManager.getLogger(controllerUserPPD.class);
+    private static final Logger logger = LogManager.getLogger(ControllerUserPPD.class);
     private final UserService userService;
-    private final accountService accountService;
+    private final AccountService accountService;
     private final UserRepository userRepository;
 
-    public controllerUserPPD(UserService userService, CBDao cbDao, com.example.PayMyBuddy.services.accountService accountService, UserRepository userRepository) {
+    public ControllerUserPPD(UserService userService, CBDao cbDao, com.example.PayMyBuddy.services.AccountService accountService, UserRepository userRepository) {
         this.userService = userService;
         this.accountService = accountService;
         this.userRepository = userRepository;
     }
 
+    /**
+     *
+     * @param email : email de l'utilisateur
+     * @return : Retourne les infos de l'utilisateur
+     * @throws Exception : Excption si parametre incorrect ou manquant
+     */
 
     @GetMapping
     public MappingJacksonValue getUser(String email) throws Exception {
@@ -53,11 +67,22 @@ public class controllerUserPPD {
         }
     }
 
+    /**
+     *
+     * @return : Retourne tous les utilisateurs de la BDD
+     */
+
     @GetMapping("/all")
     public List<User> getAllUsers() {
         // This returns a JSON or XML with the users
         return userRepository.findAll();
     }
+
+    /**
+     *
+     * @param inscription : infos utilisateur pour creation en BDD
+     * @throws Exception : Exception si parametres incorrects ou manquant
+     */
 
     @PostMapping("/post")
     public void addUser(User inscription) throws Exception {
@@ -66,9 +91,16 @@ public class controllerUserPPD {
             throw new Exception("Parameters : email, username & Password, are necessary");
         } else {
             logger.info("Add User request sent");
-            userService.AddUser(inscription);
+            userService.addUser(inscription);
         }
     }
+
+    /**
+     *
+     * @param updateUser : Infos de l'utilisateurs avec Modifciations
+     * @param request : Session http
+     * @throws Exception : Exception si parametres incorrects ou manquant
+     */
 
     @PutMapping("/put")
     public void updateUser(User updateUser, HttpServletRequest request) throws Exception {
@@ -92,6 +124,13 @@ public class controllerUserPPD {
         }
     }
 
+    /**
+     *
+     * @param email : email de l'utilisateur
+     * @param request : session http
+     * @throws Exception : Exception si parametres incorrects ou manquant
+     */
+
     @DeleteMapping("/delete")
     public void deleteUser(String email, HttpServletRequest request) throws Exception {
         if (email.isEmpty()) {
@@ -113,6 +152,13 @@ public class controllerUserPPD {
             }
         }
     }
+
+    /**
+     *
+     * @param account : informations du compte bancaire a creer
+     * @param request : session http
+     * @throws Exception : Exception si parametres incorrects ou manquant
+     */
 
     @PostMapping("/createaccount")
     public void addAccount(AccountFull account, HttpServletRequest request) throws Exception {
@@ -136,6 +182,14 @@ public class controllerUserPPD {
         }
     }
 
+    /**
+     *
+     * @param user : informations de l'utilisateur dont la CB est a supprimer
+     * @param cbnom : Nom de la Carte Bancaire
+     * @param request : session http
+     * @throws Exception : Exception si parametres incorrects ou manquant
+     */
+
     @DeleteMapping("/deletecb")
     public void deleteCB(@RequestParam(name = "emailuser")String user, @RequestParam(name = "cbnom")String cbnom, HttpServletRequest request) throws Exception {
         if (user.equals("")) {
@@ -156,6 +210,14 @@ public class controllerUserPPD {
             }
         }
     }
+
+    /**
+     *
+     * @param user : informations de l'utilisateur dont le RIB est a supprimer
+     * @param ribnom : Nom du RIB
+     * @param request : session http
+     * @throws Exception : Exception si parametres incorrects ou manquant
+     */
 
     @DeleteMapping("/deleterib")
     public void deleteRib(@RequestParam(name = "emailuser")String user, @RequestParam(name = "ribnom")String ribnom, HttpServletRequest request) throws Exception {

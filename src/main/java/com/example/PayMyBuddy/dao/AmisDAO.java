@@ -18,7 +18,7 @@ public class AmisDAO implements IAmisDAO {
     public DataBaseConfig dataBaseConfig = new DataBaseConfig();
 
     @Override
-    public void AddList(Amis amis) {
+    public void addList(Amis amis) {
         Connection con = null;
         PreparedStatement ps = null;
         try {

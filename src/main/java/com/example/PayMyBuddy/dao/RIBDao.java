@@ -22,7 +22,6 @@ public class RIBDao implements IRIBDao {
     public void addRIB(AccountFull account, int result) {
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             con = dataBaseConfig.getConnection();
 
@@ -44,7 +43,6 @@ public class RIBDao implements IRIBDao {
     public void deleteRIB(int rib) {
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             con = dataBaseConfig.getConnection();
 

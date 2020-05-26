@@ -8,6 +8,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service d'ajout d'une transaction d'argent. Permet le Transfet d'un utilisateur vers un autre utilisateur.
+ * Permet le Chargement et le solde d'un compte Utilisateur
+ */
+
 @Service
 public class TransactionService {
 
@@ -18,6 +23,10 @@ public class TransactionService {
         this.transactionDAO = transactionDAO;
     }
 
+    /**
+     *
+     * @param transactions : Informations de la Transaction
+     */
 
     public void addTransac(TransacEmail transactions) {
 
@@ -43,6 +52,8 @@ public class TransactionService {
                 transactionDAO.addTransaction(transactions);
                 logger.info("Chargement Banque");
                 break;
+                default :
+                    logger.error("Invalide Type de Transfert");
         }
     }
 }

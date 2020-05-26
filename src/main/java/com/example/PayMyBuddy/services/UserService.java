@@ -7,6 +7,13 @@ import com.example.PayMyBuddy.repository.UserRepository;
 import com.example.PayMyBuddy.modeles.User;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service permettant :
+ * - La recuperation d'infos d'un utilisateur
+ * - L'ajout d'un utilisateur
+ * - La mise a jour des infos d'un utilisateur
+ * - La suppression d'un utilisateur
+ */
 
 @Service("userService")
 public class UserService {
@@ -19,25 +26,53 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * @param email : Email de l'utilisateur
+     * @return : Retourne les informations de cet utilisateur
+     */
 
-        public User getUserInfos(String email) {
+    public User getUserInfos(String email) {
         return userDAO.getUser(email);
-        }
+    }
 
-        public void AddUser(User inscription) {
-            userDAO.saveUser(inscription);
-        }
 
-        public void updateUser(User userUpdate) {
-            userUpdate.setIduser(getUserInfos(userUpdate.getEmail()).getIduser());
-            userDAO.updateUser(userUpdate);
-        }
+    /**
+     * @param inscription : Infos de l'utilisateur a ajouter
+     */
 
-        public void deleteUser(String email) {
-            userDAO.deleteUser(email);
-        }
+    public void addUser(User inscription) {
+        userDAO.saveUser(inscription);
+    }
 
-        public User getUser(String email){
+
+    /**
+     *
+     * @param userUpdate : Infos de l'utilisateur a mettre a jour
+     */
+
+    public void updateUser(User userUpdate) {
+        userUpdate.setIduser(getUserInfos(userUpdate.getEmail()).getIduser());
+        userDAO.updateUser(userUpdate);
+    }
+
+
+    /**
+     *
+     * @param email : Email de l'utilisateur a supprimer
+     */
+
+    public void deleteUser(String email) {
+        userDAO.deleteUser(email);
+    }
+
+
+    /**
+     *
+     * @param email : Email de l'utilisateur
+     * @return : Retourne les informations d el'utilisateur
+     */
+
+    public User getUser(String email) {
         return userRepository.getUSERByEmail(email);
-        }
+    }
 }

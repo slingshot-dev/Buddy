@@ -1,5 +1,9 @@
 package com.example.PayMyBuddy.constants;
 
+/**
+ *  Classe de configuration de tous les scripts SQL
+ */
+
 public class DBConstants {
 
     public static final String INSCRIPTION_USER = "insert into user(user_email, user_nom, user_prenom, user_password, user_role) values(?,?,?,?,?)";

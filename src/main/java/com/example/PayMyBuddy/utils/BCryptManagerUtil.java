@@ -7,8 +7,17 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+/**
+ *  Methode d'Encryption pour les Mots de passes
+ */
+
 @Component
 public class BCryptManagerUtil {
+
+    /**
+     *
+     * @return : Retourne le Mot de passe encrypté
+     */
 
     @Bean
     public static PasswordEncoder passwordEncoder() {

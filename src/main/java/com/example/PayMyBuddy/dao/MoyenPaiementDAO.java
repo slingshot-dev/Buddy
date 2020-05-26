@@ -40,6 +40,7 @@ public class MoyenPaiementDAO implements IMoyenPaiementDAO {
         } catch (Exception ex) {
             logger.error("Error lors de l'ajout d'un moyen de paiement", ex);
         } finally {
+            dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
         }
@@ -50,7 +51,6 @@ public class MoyenPaiementDAO implements IMoyenPaiementDAO {
     public void deleteMoyrenP(int moyenp) {
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             con = dataBaseConfig.getConnection();
 
@@ -72,7 +72,7 @@ public class MoyenPaiementDAO implements IMoyenPaiementDAO {
         Connection con = null;
         PreparedStatement ps = null;
         boolean transactionOk = false;
-        ResultSet rs;
+        ResultSet rs = null;
         int result = 0;
         try {
             con = dataBaseConfig.getConnection();
@@ -108,6 +108,7 @@ public class MoyenPaiementDAO implements IMoyenPaiementDAO {
             }
 
         } finally {
+            dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
         }

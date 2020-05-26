@@ -13,6 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+
+/**
+ * Controller permettant l'acces et l'authentification de l'utilisateur
+ *
+ */
+
 @RestController
 @RequestMapping("/login")
 public class ControllerLogin {
@@ -26,6 +32,14 @@ public class ControllerLogin {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
+
+    /**
+     *
+     * @param email : email de l'utilisateur
+     * @param pass : Mot de passe de l'utilisateur
+     * @param request : Session Http
+     * @return : retourne True si les parametres de connexion sont valide.  Utilisateur authentifié.
+     */
 
     @GetMapping
     public boolean login(String email, String pass, HttpServletRequest request) {

@@ -20,7 +20,7 @@ public class TransactionDAO implements ITransactionDAO {
     public void addTransaction(TransacEmail transactions) {
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet rs;
+        ResultSet rs = null;
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         System.out.println(timestamp);
 
@@ -51,6 +51,7 @@ public class TransactionDAO implements ITransactionDAO {
         } catch (Exception ex) {
             logger.error("Error ", ex);
         } finally {
+            dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
         }
@@ -61,7 +62,7 @@ public class TransactionDAO implements ITransactionDAO {
     public double calculateTransaction(int user, int userBuddy) {
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet rs;
+        ResultSet rs = null;
         double resultBalance = 0;
         double resultBalancePayeur = 0;
         double resultBalancePaye = 0;
@@ -93,6 +94,7 @@ public class TransactionDAO implements ITransactionDAO {
         } catch (Exception ex) {
             logger.error("Error ", ex);
         } finally {
+            dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
         }
@@ -104,7 +106,7 @@ public class TransactionDAO implements ITransactionDAO {
     public double calculateBalanceFonds() {
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet rs;
+        ResultSet rs = null;
         double resultBalanceFonds = 0;
         double resultBanque = 0;
         double result = 0;
@@ -127,6 +129,7 @@ public class TransactionDAO implements ITransactionDAO {
         } catch (Exception ex) {
             logger.error("Error ", ex);
         } finally {
+            dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
         }
@@ -138,7 +141,7 @@ public class TransactionDAO implements ITransactionDAO {
     public double calculateBalancePrelev() {
         Connection con = null;
         PreparedStatement ps = null;
-        ResultSet rs;
+        ResultSet rs = null;
         double resultBalancePrelev = 0;
 
         try {
@@ -151,6 +154,7 @@ public class TransactionDAO implements ITransactionDAO {
         } catch (Exception ex) {
             logger.error("Error ", ex);
         } finally {
+            dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
         }

@@ -102,6 +102,7 @@ public class UserDAO implements IUserDAO {
         } catch (Exception ex) {
             logger.error("Error lors de la recuperation des information User", ex);
         } finally {
+            dataBaseConfig.closeResultSet(rs);
             dataBaseConfig.closePreparedStatement(ps);
             dataBaseConfig.closeConnection(con);
         }

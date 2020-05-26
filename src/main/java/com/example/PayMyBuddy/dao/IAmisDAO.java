@@ -4,7 +4,7 @@ import com.example.PayMyBuddy.modeles.Amis;
 
 public interface IAmisDAO {
 
-    void AddList(Amis amis);
+    void addList(Amis amis);
 
     boolean checkAmisList(Amis amis);
 

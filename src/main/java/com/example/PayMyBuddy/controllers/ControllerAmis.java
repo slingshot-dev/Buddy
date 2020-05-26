@@ -15,17 +15,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * Controller permettant d'ajouter et supprimer des amis a la Liste d'amis
+ *
+ */
+
+
 @RestController
 @RequestMapping("/amis")
-public class controllerAmis {
+public class ControllerAmis {
 
-    private static final Logger logger = LogManager.getLogger(controllerAmis.class);
+    private static final Logger logger = LogManager.getLogger(ControllerAmis.class);
     private final AmisServices amisServices;
 
-    public controllerAmis(AmisServices amisServices) {
+    public ControllerAmis(AmisServices amisServices) {
         this.amisServices = amisServices;
     }
 
+    /**
+     *
+     * @param user : Utilisateur du compte
+     * @param amis : Amis a jouter
+     * @param request : session http
+     * @throws Exception : Exception si parametres non renseignés
+     */
 
     @PostMapping("/post")
     public void addAmisList(@RequestParam(name = "emailuser")String user, @RequestParam(name = "emailamis")String amis, HttpServletRequest request) throws Exception {
