@@ -8,21 +8,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-
-import java.util.Objects;
-
-import static org.hamcrest.Matchers.containsString;
+import java.util.ResourceBundle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(classes = PayMyBuddyApplication.class)
@@ -37,10 +29,12 @@ public class controllerLoginTests {
     @Autowired
     MockMvc mockMvc;
 
+    ResourceBundle bundle = ResourceBundle.getBundle("TestResources");
+
     @Test
     public void getLoginOKTest() throws Exception {
         // Arrange & Act
-        MvcResult result = this.mockMvc.perform(get("/login?email=cyrille@outlook.fr&pass=rsv1000r"))
+        MvcResult result = this.mockMvc.perform(get("/login").contentType(MediaType.APPLICATION_JSON).content(bundle.getString("login")))
                 .andDo(print())
         // Assert
                 .andExpect(status().isOk())
@@ -51,7 +45,7 @@ public class controllerLoginTests {
     @Test
     public void getLoginKOTest() throws Exception {
 
-        MvcResult result = this.mockMvc.perform(get("/login?email=cyrille@outlook.fr&pass=test"))
+        MvcResult result = this.mockMvc.perform(get("/login").contentType(MediaType.APPLICATION_JSON).content(bundle.getString("loginko")))
                 .andDo(print())
                 .andReturn();
 

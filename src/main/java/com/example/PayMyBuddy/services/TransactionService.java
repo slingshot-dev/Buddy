@@ -26,34 +26,39 @@ public class TransactionService {
     /**
      *
      * @param transactions : Informations de la Transaction
+     * @return
      */
 
-    public void addTransac(TransacEmail transactions) {
+    public TransacEmail addTransac(TransacEmail transactions) {
 
         switch(transactions.getTransacType()) {
             case "Transfert":
-                double restMontant = transactions.getMontant() * ServicesConstants.CASH_RATE;
-                double prelevement = transactions.getMontant() - restMontant;
+                double restMontant = Math.round((transactions.getMontant() * ServicesConstants.FEE_RATE)*(1.0 / 0.01)) / (1.0 / 0.01);
+                double prelevement = Math.round((transactions.getMontant() - restMontant)*(1.0 / 0.01)) / (1.0 / 0.01);
                 transactions.setMontantPaye(restMontant);
                 transactions.setPrelevement(prelevement);
                 transactionDAO.addTransaction(transactions);
+                return transactions;
+/*                break;*/
 
-                break;
             case "Chargement Fonds":
                 transactions.setMontantPaye(transactions.getMontant());
                 transactions.setPrelevement(0);
                 transactionDAO.addTransaction(transactions);
                 logger.info("Chargement Fonds");
-                break;
+                return transactions;
+/*                break;*/
 
             case "Chargement Banque":
                 transactions.setMontantPaye(transactions.getMontant());
                 transactions.setPrelevement(0);
                 transactionDAO.addTransaction(transactions);
                 logger.info("Chargement Banque");
-                break;
-                default :
-                    logger.error("Invalide Type de Transfert");
+                return transactions;
+/*                break;*/
+            default :
+                logger.error("Invalide Type de Transfert");
         }
+    return transactions;
     }
 }

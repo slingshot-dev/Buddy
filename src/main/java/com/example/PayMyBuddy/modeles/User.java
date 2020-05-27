@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 
 @Entity
 @JsonFilter("userObject")
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

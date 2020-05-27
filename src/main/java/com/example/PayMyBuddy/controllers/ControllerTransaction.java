@@ -32,16 +32,17 @@ public class ControllerTransaction {
     /**
      * @param transactions : informations de la Transaction a realiser
      * @throws Exception : Exception si parametres incorrect ou manquant.
+     * @return
      */
 
     @PostMapping("/post")
-    public void addTransac(TransacEmail transactions) throws Exception {
+    public TransacEmail addTransac(TransacEmail transactions) throws Exception {
         if (transactions.getMontant() == 0 || transactions.getEmailPaye().isEmpty() || transactions.getEmailPayeur().isEmpty()) {
             logger.error("One or more Parameters are missing");
             throw new Exception("Parameters : emails et montant, are necessary");
         } else {
             logger.info("Add Transaction request sent");
-            transactionService.addTransac(transactions);
+            return transactionService.addTransac(transactions);
         }
     }
 

@@ -89,5 +89,27 @@ public class controllerAmisTests {
 
     }
 
+    @Test
+    public void getAmisList() throws Exception {
+        MockHttpSession session = new MockHttpSession();
+
+        User user = new User();
+        user.setEmail("cyrille@outlook.fr");
+        session.setAttribute("user", user);
+        Amis listAmis = new Amis();
+
+        listAmis.setAmisUser(2);
+        listAmis.setAmisAmis(5);
+
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/amis?user=cyrille@outlook.fr")
+                .session(session);
+        this.mockMvc.perform(builder)
+                .andDo(print())
+                .andExpect(MockMvcResultMatchers.status()
+                        .isOk());
+
+        assertTrue(amisDAO.checkAmisList(listAmis));
+
+    }
 
 }

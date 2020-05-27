@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,6 +21,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.ResourceBundle;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,6 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class controllerUserPPDTests {
 
 
+    ResourceBundle bundle = ResourceBundle.getBundle("TestResources");
 
     @Autowired
     MockMvc mockMvc;
@@ -48,7 +52,7 @@ public class controllerUserPPDTests {
 
     @BeforeEach
     public void setup() throws Exception {
-        this.mockMvc.perform(get("/login?email=cyrille@outlook.fr&pass=rsv1000r"));
+        this.mockMvc.perform(get("/login").contentType(MediaType.APPLICATION_JSON).content(bundle.getString("login")));
     }
 
     @Test

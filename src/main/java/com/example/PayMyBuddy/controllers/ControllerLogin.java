@@ -6,9 +6,7 @@ import com.example.PayMyBuddy.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -42,14 +40,14 @@ public class ControllerLogin {
      */
 
     @GetMapping
-    public boolean login(String email, String pass, HttpServletRequest request) {
+        public boolean login(@RequestBody User user, HttpServletRequest request) {
 
-        User user = userService.getUserInfos(email);
-        boolean login = passwordEncoder.matches(pass, user.getPassword());
+        User userCheck = userService.getUserInfos(user.getEmail());
+        boolean login = passwordEncoder.matches(user.getPassword(), userCheck.getPassword());
 
         if (login) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", user);
+            session.setAttribute("user", userCheck);
             logger.info("Acces Authorized");
             logger.info(session.getAttribute("user"));
         }
