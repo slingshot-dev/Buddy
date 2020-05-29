@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@Sql({"/delete.sql", "/data_test.sql"})
+@Sql({"/Create_BDD.sql", "/data_test.sql"})
 public class controllerAmisTests {
 
 
