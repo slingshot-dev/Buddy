@@ -33,10 +33,9 @@ public class ControllerLogin {
 
     /**
      *
-     * @param email : email de l'utilisateur
-     * @param pass : Mot de passe de l'utilisateur
-     * @param request : Session Http
-     * @return : retourne True si les parametres de connexion sont valide.  Utilisateur authentifié.
+     * @param user : Objet User transmis dans le Body de la requete : Infos utilisateur Email, Password.
+     * @param request : Session http
+     * @return
      */
 
     @GetMapping
